@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -40,8 +39,6 @@ body{
     flex-direction:column;
 }
 
-/* BACKGROUND */
-
 body::before{
     content:'';
     position:fixed;
@@ -51,9 +48,7 @@ body::before{
     linear-gradient(90deg, rgba(124,58,237,0.05) 1px, transparent 1px);
 
     background-size:40px 40px;
-
     animation:gridMove 18s linear infinite;
-
     z-index:0;
 }
 
@@ -68,8 +63,6 @@ body::before{
     }
 
 }
-
-/* ORBS */
 
 .orb{
     position:fixed;
@@ -95,8 +88,6 @@ body::before{
     bottom:-100px;
     right:-100px;
 }
-
-/* HEADER */
 
 header{
     position:relative;
@@ -164,8 +155,6 @@ header{
 
 }
 
-/* MODES */
-
 .modes{
     position:relative;
     z-index:10;
@@ -198,8 +187,6 @@ header{
     background:rgba(124,58,237,0.15);
 }
 
-/* CHAT */
-
 #chat{
     position:relative;
     z-index:10;
@@ -211,8 +198,6 @@ header{
     gap:16px;
     scroll-behavior:smooth;
 }
-
-/* WELCOME */
 
 .welcome{
     margin:auto;
@@ -243,8 +228,6 @@ header{
     color:var(--muted);
     line-height:1.7;
 }
-
-/* MESSAGE */
 
 .msg{
     display:flex;
@@ -307,7 +290,41 @@ header{
     border:1px solid var(--border);
 }
 
-/* CODE */
+.typing{
+    display:flex;
+    gap:5px;
+    padding:8px 0;
+}
+
+.typing span{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--accent2);
+    animation:typing 1s infinite;
+}
+
+.typing span:nth-child(2){
+    animation-delay:0.2s;
+}
+
+.typing span:nth-child(3){
+    animation-delay:0.4s;
+}
+
+@keyframes typing{
+
+    0%,100%{
+        transform:translateY(0);
+        opacity:0.4;
+    }
+
+    50%{
+        transform:translateY(-6px);
+        opacity:1;
+    }
+
+}
 
 pre{
     margin-top:10px;
@@ -322,8 +339,6 @@ code{
     color:var(--accent2);
     font-family:'Space Mono',monospace;
 }
-
-/* TOOLS */
 
 .tools{
     position:relative;
@@ -351,8 +366,6 @@ code{
     font-size:12px;
     cursor:pointer;
 }
-
-/* INPUT AREA */
 
 .input-area{
     position:relative;
@@ -396,8 +409,6 @@ code{
     cursor:pointer;
 }
 
-/* INPUT BOX */
-
 .input-box{
     display:flex;
     align-items:flex-end;
@@ -438,6 +449,7 @@ textarea::placeholder{
     font-size:20px;
     cursor:pointer;
     flex-shrink:0;
+    transition:0.2s;
 }
 
 .circle-btn:hover{
@@ -472,11 +484,141 @@ textarea::placeholder{
     font-family:'Space Mono',monospace;
 }
 
+@media(max-width:700px){
+
+    .bubble{
+        max-width:100%;
+        font-size:13px;
+    }
+
+    .welcome h2{
+        font-size:24px;
+    }
+
+}
+
+
+.sidebar{
+    position:relative;
+    z-index:20;
+    width:280px;
+    background:rgba(15,15,22,0.95);
+    border-right:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    backdrop-filter:blur(20px);
+}
+
+.main-layout{
+    display:flex;
+    flex:1;
+    overflow:hidden;
+}
+
+.sidebar-top{
+    padding:16px;
+    border-bottom:1px solid var(--border);
+}
+
+.new-chat-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.chat-history{
+    flex:1;
+    overflow-y:auto;
+    padding:10px;
+}
+
+.chat-item{
+    padding:14px;
+    border-radius:16px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:0.2s;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.chat-item:hover{
+    background:rgba(124,58,237,0.15);
+    border-color:var(--accent);
+}
+
+.main-content{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:220px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .main-layout{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        height:170px;
+        border-right:none;
+        border-bottom:1px solid var(--border);
+    }
+
+    .chat-history{
+        display:flex;
+        gap:10px;
+        overflow-x:auto;
+        overflow-y:hidden;
+    }
+
+    .chat-item{
+        min-width:180px;
+        margin-bottom:0;
+    }
+
+}
+
 </style>
 
 </head>
 
 <body>
+
+<div class="main-layout">
+
+<div class="sidebar">
+
+<div class="sidebar-top">
+
+<button class="new-chat-btn" onclick="createNewChat()">
+➕ New Chat
+</button>
+
+</div>
+
+<div class="chat-history" id="chatHistory"></div>
+
+</div>
+
+<div class="main-content">
 
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
@@ -505,33 +647,23 @@ ONLINE
 
 </header>
 
-<!-- MODES -->
-
 <div class="modes">
 
 <div class="mode">🧠 Problem Solver</div>
-
 <div class="mode">💻 Coding AI</div>
-
 <div class="mode">⚡ JavaScript</div>
-
 <div class="mode">🌐 HTML Generator</div>
-
 <div class="mode">🐍 Python Generator</div>
-
 <div class="mode">🎨 AI Image Generator</div>
-
 <div class="mode">🎬 AI Video Generator</div>
-
 <div class="mode">🎙 Voice Assistant</div>
-
 <div class="mode">📸 Photo Editing AI</div>
-
 <div class="mode">💰 Online Earning</div>
+<div class="mode">🤖 AI Mode</div>
+<div class="mode">🧠 Smart Memory</div>
+<div class="mode">🔊 AI Voice</div>
 
 </div>
-
-<!-- CHAT -->
 
 <div id="chat">
 
@@ -551,48 +683,41 @@ solve daily problems, and much more.
 
 </div>
 
-<!-- TOOLS -->
-
 <div class="tools">
 
-<button class="tool-btn"
-onclick="quickAsk('Solve my daily problem')">
+<button class="tool-btn" onclick="quickAsk('Solve my daily problem')">
 🧠 Problems
 </button>
 
-<button class="tool-btn"
-onclick="quickAsk('Write JavaScript code')">
+<button class="tool-btn" onclick="quickAsk('Write JavaScript code')">
 ⚡ JavaScript
 </button>
 
-<button class="tool-btn"
-onclick="quickAsk('Write HTML code')">
+<button class="tool-btn" onclick="quickAsk('Write HTML code')">
 🌐 HTML
 </button>
 
-<button class="tool-btn"
-onclick="quickAsk('Write Python code')">
+<button class="tool-btn" onclick="quickAsk('Write Python code')">
 🐍 Python
 </button>
 
-<button class="tool-btn"
-onclick="quickAsk('Generate AI image')">
+<button class="tool-btn" onclick="quickAsk('Generate AI image')">
 🎨 Images
 </button>
 
-<button class="tool-btn"
-onclick="quickAsk('Generate cinematic AI video idea')">
+<button class="tool-btn" onclick="quickAsk('Generate cinematic AI video idea')">
 🎬 Videos
 </button>
 
-<button class="tool-btn"
-onclick="quickAsk('How can I earn money online?')">
+<button class="tool-btn" onclick="quickAsk('How can I earn money online?')">
 💰 Earn Money
 </button>
 
-</div>
+<button class="tool-btn" onclick="toggleAIMode()">
+🤖 AI Mode
+</button>
 
-<!-- INPUT -->
+</div>
 
 <div class="input-area">
 
@@ -600,11 +725,7 @@ onclick="quickAsk('How can I earn money online?')">
 
 <div class="input-box">
 
-<!-- FILE -->
-
-<button
-class="circle-btn"
-onclick="openPicker()">
+<button class="circle-btn" onclick="openPicker()">
 +
 </button>
 
@@ -616,15 +737,11 @@ multiple
 accept="image/*,video/*"
 >
 
-<!-- TEXT -->
-
 <textarea
 id="userInput"
 placeholder="Ask Aura AI anything..."
 rows="1">
 </textarea>
-
-<!-- VOICE -->
 
 <button
 class="circle-btn"
@@ -632,8 +749,6 @@ id="voiceBtn"
 onclick="startVoice()">
 🎙
 </button>
-
-<!-- SEND -->
 
 <button
 class="circle-btn"
@@ -652,20 +767,20 @@ Press Enter to send · Shift + Enter for next line
 <script>
 
 const chat = document.getElementById('chat');
-
 const input = document.getElementById('userInput');
-
 const previewArea = document.getElementById('previewArea');
-
 const fileInput = document.getElementById('fileInput');
-
 const voiceBtn = document.getElementById('voiceBtn');
-
 const welcome = document.getElementById('welcome');
 
 let uploadedFiles = [];
-
-/* AUTO RESIZE */
+let conversationHistory = [];
+let recognition;
+let isListening = false;
+let isSpeaking = false;
+let aiMode = false;
+let allChats = [];
+let currentChatId = null;
 
 input.addEventListener('input',()=>{
 
@@ -675,8 +790,6 @@ input.addEventListener('input',()=>{
     Math.min(input.scrollHeight,140)+'px';
 
 });
-
-/* ENTER SEND */
 
 input.addEventListener('keydown',(e)=>{
 
@@ -690,7 +803,45 @@ input.addEventListener('keydown',(e)=>{
 
 });
 
-/* QUICK ASK */
+function createNewChat(){
+
+    const id = Date.now();
+
+    currentChatId = id;
+
+    conversationHistory = [];
+
+    chat.innerHTML='';
+
+    welcome.style.display='block';
+
+    addHistoryItem('New Chat');
+
+}
+
+function addHistoryItem(title){
+
+    const history=document.getElementById('chatHistory');
+
+    const item=document.createElement('div');
+
+    item.className='chat-item';
+
+    item.innerHTML=`🧠 ${title}`;
+
+    history.prepend(item);
+
+}
+
+function saveCurrentChat(title,text){
+
+    allChats.push({
+        id:currentChatId,
+        title,
+        messages:text
+    });
+
+}
 
 function quickAsk(text){
 
@@ -700,15 +851,11 @@ function quickAsk(text){
 
 }
 
-/* OPEN FILE PICKER */
-
 function openPicker(){
 
     fileInput.click();
 
 }
-
-/* FILE UPLOAD */
 
 fileInput.addEventListener('change',function(){
 
@@ -727,12 +874,6 @@ fileInput.addEventListener('change',function(){
             const img=document.createElement('img');
 
             img.src=URL.createObjectURL(file);
-
-            img.onload=()=>{
-
-                URL.revokeObjectURL(img.src);
-
-            };
 
             wrapper.appendChild(img);
 
@@ -773,8 +914,6 @@ fileInput.addEventListener('change',function(){
 
 });
 
-/* MESSAGE */
-
 function addMessage(role,text){
 
     welcome.style.display='none';
@@ -806,8 +945,6 @@ function addMessage(role,text){
 
 }
 
-/* FORMAT */
-
 function formatText(text){
 
     text=text.replace(
@@ -820,8 +957,6 @@ function formatText(text){
     return text;
 
 }
-
-/* AUTO SCROLL */
 
 function smoothScroll(){
 
@@ -836,11 +971,53 @@ function smoothScroll(){
 
 }
 
-/* SEND */
+function showTyping(){
 
-async function sendMessage(){
+    const msg=document.createElement('div');
 
-    const text=input.value.trim();
+    msg.className='msg ai';
+
+    msg.id='typingBox';
+
+    msg.innerHTML=`
+
+    <div class="avatar">✨</div>
+
+    <div class="bubble">
+
+    <div class="typing">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+    </div>
+
+    </div>
+
+    `;
+
+    chat.appendChild(msg);
+
+    smoothScroll();
+
+}
+
+function removeTyping(){
+
+    const typing=document.getElementById('typingBox');
+
+    if(typing){
+
+        typing.remove();
+
+    }
+
+}
+
+async function sendMessage(customText=null){
+
+    const text = customText || input.value.trim();
 
     if(!text && uploadedFiles.length===0){
 
@@ -853,50 +1030,129 @@ async function sendMessage(){
         text || '📎 Uploaded Media'
     );
 
+    conversationHistory.push({
+        role:'user',
+        content:text
+    });
+
+    if(conversationHistory.length===1){
+
+        addHistoryItem(text.slice(0,40));
+
+    }
+
     input.value='';
 
     input.style.height='auto';
-
-    /*
-    ADD API HERE LATER
-    */
-
-    const aiReply=`
-✨ Aura AI Ready
-
-Available Features:
-
-• Daily life problem solving
-• HTML code generation
-• CSS code generation
-• JavaScript code generation
-• Python code generation
-• AI image generation
-• AI video generation
-• Voice conversation
-• AI speaking replies
-• Photo editing support
-• Video editing support
-• Website creation
-• Online earning ideas
-• Smart futuristic UI
-`;
-
-    addMessage('ai',aiReply);
-
-    speak(aiReply);
 
     previewArea.innerHTML='';
 
     uploadedFiles=[];
 
+    window.speechSynthesis.cancel();
+
+    isSpeaking = false;
+
+    showTyping();
+
+    setTimeout(()=>{
+
+        removeTyping();
+
+        const aiReply=`✨ Aura AI Online
+
+AI MODE ACTIVATED
+
+Features Available:
+
+• Smart AI conversation
+• Voice assistant mode
+• AI speaking replies
+• AI interruption detection
+• Coding generation
+• HTML generation
+• CSS generation
+• JavaScript generation
+• Python generation
+• AI image ideas
+• AI video ideas
+• Problem solving
+• Smart futuristic UI
+• Voice input support
+• AI memory system
+• Continuous AI chat
+
+Next Step:
+
+Connect your secure backend server to enable real AI responses safely.`;
+
+        conversationHistory.push({
+            role:'assistant',
+            content:aiReply
+        });
+
+        typeMessage(aiReply);
+
+    },1200);
+
 }
 
-/* SPEAK */
+function typeMessage(text){
+
+    const msg=document.createElement('div');
+
+    msg.className='msg ai';
+
+    const avatar=document.createElement('div');
+
+    avatar.className='avatar';
+
+    avatar.innerHTML='✨';
+
+    const bubble=document.createElement('div');
+
+    bubble.className='bubble';
+
+    msg.appendChild(avatar);
+
+    msg.appendChild(bubble);
+
+    chat.appendChild(msg);
+
+    let index=0;
+
+    const interval=setInterval(()=>{
+
+        bubble.innerHTML=
+        formatText(
+            text.slice(0,index)
+        );
+
+        index++;
+
+        smoothScroll();
+
+        if(index>text.length){
+
+            clearInterval(interval);
+
+            if(aiMode){
+
+                speak(text);
+
+            }
+
+        }
+
+    },10);
+
+}
 
 function speak(text){
 
-    const speech=
+    window.speechSynthesis.cancel();
+
+    const speech =
     new SpeechSynthesisUtterance(text);
 
     speech.lang='en-US';
@@ -907,15 +1163,21 @@ function speak(text){
 
     speech.volume=1;
 
+    isSpeaking = true;
+
+    speech.onend=()=>{
+
+        isSpeaking = false;
+
+    };
+
     window.speechSynthesis.speak(speech);
 
 }
 
-/* VOICE */
+function initVoice(){
 
-function startVoice(){
-
-    const SpeechRecognition=
+    const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
@@ -929,41 +1191,138 @@ function startVoice(){
 
     }
 
-    const recognition=
+    recognition =
     new SpeechRecognition();
 
     recognition.lang='en-US';
 
-    recognition.start();
+    recognition.continuous=true;
 
-    voiceBtn.classList.add('voice-active');
+    recognition.interimResults=true;
 
-    recognition.onresult=function(event){
+    recognition.onstart=()=>{
 
-        const transcript=
-        event.results[0][0].transcript;
+        isListening=true;
+
+        voiceBtn.classList.add(
+            'voice-active'
+        );
+
+    };
+
+    recognition.onend=()=>{
+
+        isListening=false;
+
+        voiceBtn.classList.remove(
+            'voice-active'
+        );
+
+    };
+
+    recognition.onresult=(event)=>{
+
+        let transcript='';
+
+        for(
+            let i=event.resultIndex;
+            i<event.results.length;
+            i++
+        ){
+
+            transcript +=
+            event.results[i][0].transcript;
+
+        }
 
         input.value=transcript;
 
-        voiceBtn.classList.remove('voice-active');
+        input.dispatchEvent(
+            new Event('input')
+        );
 
-    };
+        if(isSpeaking){
 
-    recognition.onerror=function(){
+            window.speechSynthesis.cancel();
 
-        voiceBtn.classList.remove('voice-active');
+            isSpeaking=false;
 
-    };
+        }
 
-    recognition.onend=function(){
+        const last =
+        event.results[
+            event.results.length-1
+        ];
 
-        voiceBtn.classList.remove('voice-active');
+        if(last.isFinal && aiMode){
+
+            sendMessage(transcript);
+
+        }
 
     };
 
 }
 
+function startVoice(){
+
+    if(!recognition){
+
+        initVoice();
+
+    }
+
+    if(isListening){
+
+        recognition.stop();
+
+        return;
+
+    }
+
+    recognition.start();
+
+}
+
+createNewChat();
+
+function toggleAIMode(){
+
+    aiMode = !aiMode;
+
+    if(aiMode){
+
+        addMessage(
+            'ai',
+            '🤖 AI Voice Mode Activated. You can now talk continuously with Aura AI.'
+        );
+
+        speak(
+            'AI Voice Mode Activated'
+        );
+
+    }
+
+    else{
+
+        addMessage(
+            'ai',
+            '🔇 AI Voice Mode Disabled.'
+        );
+
+        window.speechSynthesis.cancel();
+
+    }
+
+}
+
 </script>
+
+</div>
+
+</div>
 
 </body>
 </html>
+````
+
