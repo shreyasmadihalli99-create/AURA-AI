@@ -6,22 +6,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Shreyas AI Ultra</title>
+<title>Aura AI</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
     --bg:#09090f;
-    --surface:#12121a;
-    --surface2:#1b1b27;
-    --border:#252538;
+    --surface:#13131d;
+    --surface2:#1d1d2b;
+    --border:#26263b;
     --accent:#7c3aed;
     --accent2:#06d6a0;
     --accent3:#ff6b6b;
-    --text:#f0f0ff;
-    --muted:#7b7b91;
+    --text:#f5f5ff;
+    --muted:#8c8ca5;
 }
 
 *{
@@ -47,21 +47,26 @@ body::before{
     position:fixed;
     inset:0;
     background:
-    linear-gradient(rgba(124,58,237,0.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(124,58,237,0.05) 1px,transparent 1px);
+    linear-gradient(rgba(124,58,237,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,0.05) 1px, transparent 1px);
 
     background-size:40px 40px;
+
     animation:gridMove 18s linear infinite;
+
     z-index:0;
 }
 
 @keyframes gridMove{
+
     from{
         transform:translateY(0);
     }
+
     to{
         transform:translateY(40px);
     }
+
 }
 
 /* ORBS */
@@ -69,25 +74,26 @@ body::before{
 .orb{
     position:fixed;
     border-radius:50%;
-    filter:blur(90px);
-    opacity:0.16;
+    filter:blur(100px);
+    opacity:0.18;
     pointer-events:none;
+    z-index:0;
 }
 
 .orb1{
     width:400px;
     height:400px;
     background:var(--accent);
-    top:-100px;
-    left:-100px;
+    top:-120px;
+    left:-120px;
 }
 
 .orb2{
     width:350px;
     height:350px;
     background:var(--accent2);
-    right:-100px;
     bottom:-100px;
+    right:-100px;
 }
 
 /* HEADER */
@@ -95,28 +101,29 @@ body::before{
 header{
     position:relative;
     z-index:10;
-    padding:18px;
-    border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
     gap:14px;
-    background:rgba(10,10,15,0.8);
+    padding:18px;
+    border-bottom:1px solid var(--border);
+    background:rgba(10,10,15,0.85);
     backdrop-filter:blur(18px);
 }
 
 .logo{
-    width:48px;
-    height:48px;
-    border-radius:14px;
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    font-size:26px;
+    box-shadow:0 0 30px rgba(124,58,237,0.5);
 }
 
 .header-text h1{
-    font-size:20px;
+    font-size:22px;
     font-weight:800;
 }
 
@@ -124,6 +131,7 @@ header{
     font-size:11px;
     color:var(--muted);
     margin-top:2px;
+    font-family:'Space Mono',monospace;
 }
 
 .status{
@@ -133,6 +141,7 @@ header{
     gap:8px;
     color:var(--accent2);
     font-size:11px;
+    font-family:'Space Mono',monospace;
 }
 
 .dot{
@@ -144,12 +153,15 @@ header{
 }
 
 @keyframes pulse{
+
     0%,100%{
         opacity:1;
     }
+
     50%{
         opacity:0.4;
     }
+
 }
 
 /* MODES */
@@ -162,17 +174,23 @@ header{
     overflow-x:auto;
     padding:12px;
     border-bottom:1px solid var(--border);
+    scrollbar-width:none;
+}
+
+.modes::-webkit-scrollbar{
+    display:none;
 }
 
 .mode{
+    flex-shrink:0;
     padding:10px 16px;
     border-radius:18px;
     background:var(--surface);
     border:1px solid var(--border);
-    white-space:nowrap;
-    cursor:pointer;
     font-size:12px;
+    cursor:pointer;
     transition:0.2s;
+    white-space:nowrap;
 }
 
 .mode:hover{
@@ -183,14 +201,15 @@ header{
 /* CHAT */
 
 #chat{
+    position:relative;
+    z-index:10;
     flex:1;
     overflow-y:auto;
     padding:18px;
     display:flex;
     flex-direction:column;
     gap:16px;
-    position:relative;
-    z-index:10;
+    scroll-behavior:smooth;
 }
 
 /* WELCOME */
@@ -205,13 +224,14 @@ header{
     width:90px;
     height:90px;
     margin:auto;
-    border-radius:26px;
+    margin-bottom:20px;
+    border-radius:24px;
     background:linear-gradient(135deg,var(--accent),var(--accent2));
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:40px;
-    margin-bottom:20px;
+    font-size:42px;
+    box-shadow:0 0 40px rgba(124,58,237,0.5);
 }
 
 .welcome h2{
@@ -221,7 +241,7 @@ header{
 
 .welcome p{
     color:var(--muted);
-    line-height:1.6;
+    line-height:1.7;
 }
 
 /* MESSAGE */
@@ -229,15 +249,30 @@ header{
 .msg{
     display:flex;
     gap:10px;
+    animation:fadeIn 0.25s ease;
 }
 
 .msg.user{
     flex-direction:row-reverse;
 }
 
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
 .avatar{
-    width:36px;
-    height:36px;
+    width:38px;
+    height:38px;
     border-radius:12px;
     display:flex;
     align-items:center;
@@ -258,8 +293,8 @@ header{
     padding:14px;
     border-radius:18px;
     line-height:1.7;
-    font-size:14px;
     word-break:break-word;
+    font-size:14px;
 }
 
 .msg.user .bubble{
@@ -270,6 +305,22 @@ header{
 .msg.ai .bubble{
     background:var(--surface);
     border:1px solid var(--border);
+}
+
+/* CODE */
+
+pre{
+    margin-top:10px;
+    background:#0c0c12;
+    padding:14px;
+    border-radius:14px;
+    overflow:auto;
+    border:1px solid var(--border);
+}
+
+code{
+    color:var(--accent2);
+    font-family:'Space Mono',monospace;
 }
 
 /* TOOLS */
@@ -283,26 +334,31 @@ header{
     padding:12px;
     border-top:1px solid var(--border);
     border-bottom:1px solid var(--border);
+    scrollbar-width:none;
+}
+
+.tools::-webkit-scrollbar{
+    display:none;
 }
 
 .tool-btn{
-    padding:10px 14px;
+    flex-shrink:0;
+    padding:10px 15px;
     border:none;
     border-radius:16px;
     background:linear-gradient(135deg,var(--accent),var(--accent2));
     color:white;
-    cursor:pointer;
-    white-space:nowrap;
     font-size:12px;
+    cursor:pointer;
 }
 
-/* INPUT */
+/* INPUT AREA */
 
 .input-area{
     position:relative;
     z-index:10;
     padding:14px;
-    background:rgba(10,10,15,0.85);
+    background:rgba(10,10,15,0.9);
     backdrop-filter:blur(20px);
 }
 
@@ -313,14 +369,34 @@ header{
     margin-bottom:10px;
 }
 
-.preview-area img,
-.preview-area video{
+.preview-wrapper{
+    position:relative;
+    flex-shrink:0;
+}
+
+.preview-wrapper img,
+.preview-wrapper video{
     width:90px;
     height:90px;
     object-fit:cover;
-    border-radius:14px;
+    border-radius:16px;
     border:1px solid var(--border);
 }
+
+.remove-btn{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    width:22px;
+    height:22px;
+    border:none;
+    border-radius:50%;
+    background:red;
+    color:white;
+    cursor:pointer;
+}
+
+/* INPUT BOX */
 
 .input-box{
     display:flex;
@@ -328,7 +404,7 @@ header{
     gap:10px;
     background:var(--surface);
     border:1px solid var(--border);
-    border-radius:18px;
+    border-radius:20px;
     padding:10px;
 }
 
@@ -337,30 +413,35 @@ textarea{
     background:none;
     border:none;
     outline:none;
-    color:white;
     resize:none;
     min-height:24px;
-    max-height:120px;
+    max-height:140px;
+    color:white;
     font-size:14px;
     font-family:'Syne',sans-serif;
 }
 
-button{
-    border:none;
-    cursor:pointer;
+textarea::placeholder{
+    color:var(--muted);
 }
 
 .circle-btn{
-    width:42px;
-    height:42px;
+    width:44px;
+    height:44px;
+    border:none;
     border-radius:14px;
     display:flex;
     align-items:center;
     justify-content:center;
-    flex-shrink:0;
     background:linear-gradient(135deg,var(--accent),var(--accent2));
     color:white;
     font-size:20px;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.circle-btn:hover{
+    transform:scale(1.05);
 }
 
 .voice-active{
@@ -368,27 +449,26 @@ button{
 }
 
 @keyframes voicePulse{
+
     0%{
         transform:scale(1);
     }
+
     50%{
-        transform:scale(1.1);
+        transform:scale(1.12);
     }
+
     100%{
         transform:scale(1);
     }
+
 }
 
-pre{
-    overflow:auto;
-    background:#0d0d14;
-    padding:12px;
-    border-radius:12px;
-    margin-top:10px;
-}
-
-code{
-    color:var(--accent2);
+.hint{
+    text-align:center;
+    margin-top:8px;
+    font-size:10px;
+    color:var(--muted);
     font-family:'Space Mono',monospace;
 }
 
@@ -403,31 +483,51 @@ code{
 
 <header>
 
-<div class="logo">🤖</div>
+<div class="logo">✨</div>
 
 <div class="header-text">
-<h1>Shreyas AI Ultra</h1>
-<p>AI Assistant · Voice · Images · Videos · Coding</p>
+
+<h1>Aura AI</h1>
+
+<p>
+Voice Assistant · Coding · AI Images · AI Videos
+</p>
+
 </div>
 
 <div class="status">
+
 <div class="dot"></div>
+
 ONLINE
+
 </div>
 
 </header>
 
-<!-- AI MODES -->
+<!-- MODES -->
 
 <div class="modes">
 
-<div class="mode">🧠 Daily Life Solver</div>
+<div class="mode">🧠 Problem Solver</div>
+
 <div class="mode">💻 Coding AI</div>
+
+<div class="mode">⚡ JavaScript</div>
+
+<div class="mode">🌐 HTML Generator</div>
+
+<div class="mode">🐍 Python Generator</div>
+
 <div class="mode">🎨 AI Image Generator</div>
+
 <div class="mode">🎬 AI Video Generator</div>
+
 <div class="mode">🎙 Voice Assistant</div>
+
 <div class="mode">📸 Photo Editing AI</div>
-<div class="mode">🚀 Business Ideas</div>
+
+<div class="mode">💰 Online Earning</div>
 
 </div>
 
@@ -437,14 +537,14 @@ ONLINE
 
 <div class="welcome" id="welcome">
 
-<div class="welcome-icon">🤖</div>
+<div class="welcome-icon">✨</div>
 
-<h2>Welcome Back</h2>
+<h2>Welcome to Aura AI</h2>
 
 <p>
-Your futuristic AI assistant can solve problems,
-write code, generate images/videos,
-and even talk with you.
+Your futuristic AI assistant that can talk with you,
+generate code, create AI images, help edit photos,
+solve daily problems, and much more.
 </p>
 
 </div>
@@ -455,29 +555,44 @@ and even talk with you.
 
 <div class="tools">
 
-<button class="tool-btn" onclick="quickAsk('Solve my daily problem')">
-🧠 Solve Problems
+<button class="tool-btn"
+onclick="quickAsk('Solve my daily problem')">
+🧠 Problems
 </button>
 
-<button class="tool-btn" onclick="quickAsk('Write full website code')">
-💻 Generate Code
+<button class="tool-btn"
+onclick="quickAsk('Write JavaScript code')">
+⚡ JavaScript
 </button>
 
-<button class="tool-btn" onclick="quickAsk('Generate aesthetic AI image')">
-🎨 AI Image
+<button class="tool-btn"
+onclick="quickAsk('Write HTML code')">
+🌐 HTML
 </button>
 
-<button class="tool-btn" onclick="quickAsk('Generate cinematic AI video idea')">
-🎬 AI Video
+<button class="tool-btn"
+onclick="quickAsk('Write Python code')">
+🐍 Python
 </button>
 
-<button class="tool-btn" onclick="quickAsk('Give online earning ideas')">
+<button class="tool-btn"
+onclick="quickAsk('Generate AI image')">
+🎨 Images
+</button>
+
+<button class="tool-btn"
+onclick="quickAsk('Generate cinematic AI video idea')">
+🎬 Videos
+</button>
+
+<button class="tool-btn"
+onclick="quickAsk('How can I earn money online?')">
 💰 Earn Money
 </button>
 
 </div>
 
-<!-- INPUT AREA -->
+<!-- INPUT -->
 
 <div class="input-area">
 
@@ -485,9 +600,11 @@ and even talk with you.
 
 <div class="input-box">
 
-<!-- UPLOAD -->
+<!-- FILE -->
 
-<button class="circle-btn" onclick="openPicker()">
+<button
+class="circle-btn"
+onclick="openPicker()">
 +
 </button>
 
@@ -503,17 +620,16 @@ accept="image/*,video/*"
 
 <textarea
 id="userInput"
-placeholder="Ask anything..."
-rows="1"
-></textarea>
+placeholder="Ask Aura AI anything..."
+rows="1">
+</textarea>
 
 <!-- VOICE -->
 
 <button
 class="circle-btn"
 id="voiceBtn"
-onclick="startVoice()"
->
+onclick="startVoice()">
 🎙
 </button>
 
@@ -521,11 +637,14 @@ onclick="startVoice()"
 
 <button
 class="circle-btn"
-onclick="sendMessage()"
->
+onclick="sendMessage()">
 ➤
 </button>
 
+</div>
+
+<div class="hint">
+Press Enter to send · Shift + Enter for next line
 </div>
 
 </div>
@@ -533,20 +652,27 @@ onclick="sendMessage()"
 <script>
 
 const chat = document.getElementById('chat');
+
 const input = document.getElementById('userInput');
+
 const previewArea = document.getElementById('previewArea');
+
 const fileInput = document.getElementById('fileInput');
+
 const voiceBtn = document.getElementById('voiceBtn');
+
 const welcome = document.getElementById('welcome');
 
 let uploadedFiles = [];
 
-/* AUTO HEIGHT */
+/* AUTO RESIZE */
 
 input.addEventListener('input',()=>{
 
-input.style.height='auto';
-input.style.height=Math.min(input.scrollHeight,120)+'px';
+    input.style.height='auto';
+
+    input.style.height=
+    Math.min(input.scrollHeight,140)+'px';
 
 });
 
@@ -554,12 +680,13 @@ input.style.height=Math.min(input.scrollHeight,120)+'px';
 
 input.addEventListener('keydown',(e)=>{
 
-if(e.key==='Enter' && !e.shiftKey){
+    if(e.key==='Enter' && !e.shiftKey){
 
-e.preventDefault();
-sendMessage();
+        e.preventDefault();
 
-}
+        sendMessage();
+
+    }
 
 });
 
@@ -567,52 +694,82 @@ sendMessage();
 
 function quickAsk(text){
 
-input.value=text;
-sendMessage();
+    input.value=text;
+
+    sendMessage();
 
 }
 
-/* OPEN PICKER */
+/* OPEN FILE PICKER */
 
 function openPicker(){
 
-fileInput.click();
+    fileInput.click();
 
 }
 
-/* FILES */
+/* FILE UPLOAD */
 
 fileInput.addEventListener('change',function(){
 
-const files=[...this.files];
+    const files=[...this.files];
 
-files.forEach(file=>{
+    files.forEach(file=>{
 
-uploadedFiles.push(file);
+        uploadedFiles.push(file);
 
-if(file.type.startsWith('image')){
+        const wrapper=document.createElement('div');
 
-const img=document.createElement('img');
+        wrapper.className='preview-wrapper';
 
-img.src=URL.createObjectURL(file);
+        if(file.type.startsWith('image')){
 
-previewArea.appendChild(img);
+            const img=document.createElement('img');
 
-}
+            img.src=URL.createObjectURL(file);
 
-else if(file.type.startsWith('video')){
+            img.onload=()=>{
 
-const video=document.createElement('video');
+                URL.revokeObjectURL(img.src);
 
-video.src=URL.createObjectURL(file);
+            };
 
-video.controls=true;
+            wrapper.appendChild(img);
 
-previewArea.appendChild(video);
+        }
 
-}
+        else if(file.type.startsWith('video')){
 
-});
+            const video=document.createElement('video');
+
+            video.src=URL.createObjectURL(file);
+
+            video.controls=true;
+
+            wrapper.appendChild(video);
+
+        }
+
+        const removeBtn=document.createElement('button');
+
+        removeBtn.className='remove-btn';
+
+        removeBtn.innerHTML='×';
+
+        removeBtn.onclick=()=>{
+
+            wrapper.remove();
+
+            uploadedFiles=
+            uploadedFiles.filter(f=>f!==file);
+
+        };
+
+        wrapper.appendChild(removeBtn);
+
+        previewArea.appendChild(wrapper);
+
+    });
 
 });
 
@@ -620,31 +777,32 @@ previewArea.appendChild(video);
 
 function addMessage(role,text){
 
-welcome.style.display='none';
+    welcome.style.display='none';
 
-const msg=document.createElement('div');
+    const msg=document.createElement('div');
 
-msg.className=`msg ${role}`;
+    msg.className=`msg ${role}`;
 
-const avatar=document.createElement('div');
+    const avatar=document.createElement('div');
 
-avatar.className='avatar';
+    avatar.className='avatar';
 
-avatar.innerHTML=role==='user'?'👤':'🤖';
+    avatar.innerHTML=
+    role==='user' ? '👤' : '✨';
 
-const bubble=document.createElement('div');
+    const bubble=document.createElement('div');
 
-bubble.className='bubble';
+    bubble.className='bubble';
 
-bubble.innerHTML=formatText(text);
+    bubble.innerHTML=formatText(text);
 
-msg.appendChild(avatar);
+    msg.appendChild(avatar);
 
-msg.appendChild(bubble);
+    msg.appendChild(bubble);
 
-chat.appendChild(msg);
+    chat.appendChild(msg);
 
-chat.scrollTop=chat.scrollHeight;
+    smoothScroll();
 
 }
 
@@ -652,14 +810,29 @@ chat.scrollTop=chat.scrollHeight;
 
 function formatText(text){
 
-text=text.replace(
-/```([\s\S]*?)```/g,
-'<pre><code>$1</code></pre>'
-);
+    text=text.replace(
+        /```([\s\S]*?)```/g,
+        '<pre><code>$1</code></pre>'
+    );
 
-text=text.replace(/\n/g,'<br>');
+    text=text.replace(/\n/g,'<br>');
 
-return text;
+    return text;
+
+}
+
+/* AUTO SCROLL */
+
+function smoothScroll(){
+
+    setTimeout(()=>{
+
+        chat.scrollTo({
+            top:chat.scrollHeight,
+            behavior:'smooth'
+        });
+
+    },100);
 
 }
 
@@ -667,47 +840,55 @@ return text;
 
 async function sendMessage(){
 
-const text=input.value.trim();
+    const text=input.value.trim();
 
-if(!text && uploadedFiles.length===0){
-return;
-}
+    if(!text && uploadedFiles.length===0){
 
-addMessage('user',text || '📎 Uploaded Media');
+        return;
 
-input.value='';
-input.style.height='auto';
+    }
 
-previewArea.innerHTML='';
+    addMessage(
+        'user',
+        text || '📎 Uploaded Media'
+    );
 
-/*
-API WILL COME HERE LATER
-*/
+    input.value='';
 
-const aiReply=`
-✨ AI Assistant Ready
+    input.style.height='auto';
 
-Features Available:
+    /*
+    ADD API HERE LATER
+    */
+
+    const aiReply=`
+✨ Aura AI Ready
+
+Available Features:
 
 • Daily life problem solving
-• Coding in all languages
+• HTML code generation
+• CSS code generation
+• JavaScript code generation
+• Python code generation
 • AI image generation
-• AI video ideas
+• AI video generation
+• Voice conversation
 • AI speaking replies
-• Voice assistant
-• Upload photos/videos
-• Website generation
-• Editing help
-• Business ideas
-
-Add your API key next.
+• Photo editing support
+• Video editing support
+• Website creation
+• Online earning ideas
+• Smart futuristic UI
 `;
 
-addMessage('ai',aiReply);
+    addMessage('ai',aiReply);
 
-speak(aiReply);
+    speak(aiReply);
 
-uploadedFiles=[];
+    previewArea.innerHTML='';
+
+    uploadedFiles=[];
 
 }
 
@@ -715,17 +896,18 @@ uploadedFiles=[];
 
 function speak(text){
 
-const speech=new SpeechSynthesisUtterance(text);
+    const speech=
+    new SpeechSynthesisUtterance(text);
 
-speech.lang='en-US';
+    speech.lang='en-US';
 
-speech.rate=1;
+    speech.rate=1;
 
-speech.pitch=1;
+    speech.pitch=1;
 
-speech.volume=1;
+    speech.volume=1;
 
-window.speechSynthesis.speak(speech);
+    window.speechSynthesis.speak(speech);
 
 }
 
@@ -733,47 +915,51 @@ window.speechSynthesis.speak(speech);
 
 function startVoice(){
 
-const SpeechRecognition=
-window.SpeechRecognition ||
-window.webkitSpeechRecognition;
+    const SpeechRecognition=
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
 
-if(!SpeechRecognition){
+    if(!SpeechRecognition){
 
-alert('Voice recognition not supported');
+        alert(
+            'Voice recognition not supported in this browser'
+        );
 
-return;
+        return;
 
-}
+    }
 
-const recognition=new SpeechRecognition();
+    const recognition=
+    new SpeechRecognition();
 
-recognition.lang='en-US';
+    recognition.lang='en-US';
 
-recognition.start();
+    recognition.start();
 
-voiceBtn.classList.add('voice-active');
+    voiceBtn.classList.add('voice-active');
 
-recognition.onresult=function(event){
+    recognition.onresult=function(event){
 
-const transcript=event.results[0][0].transcript;
+        const transcript=
+        event.results[0][0].transcript;
 
-input.value=transcript;
+        input.value=transcript;
 
-voiceBtn.classList.remove('voice-active');
+        voiceBtn.classList.remove('voice-active');
 
-};
+    };
 
-recognition.onerror=function(){
+    recognition.onerror=function(){
 
-voiceBtn.classList.remove('voice-active');
+        voiceBtn.classList.remove('voice-active');
 
-};
+    };
 
-recognition.onend=function(){
+    recognition.onend=function(){
 
-voiceBtn.classList.remove('voice-active');
+        voiceBtn.classList.remove('voice-active');
 
-};
+    };
 
 }
 
